@@ -8,10 +8,10 @@ const App = () => {
     <>
       <main>
         <div className="app">
-          <div className="w-1/2 p-4">
+          <div className="w-1/2 p-4 bg-[#2C2C2C]">
             <FormComponent />
           </div>
-          <div className="w-1/2 p-4">
+          <div className="w-1/2 bg-[#121212] p-4">
             <OutputComponents />
           </div>
         </div>
