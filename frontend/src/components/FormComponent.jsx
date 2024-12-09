@@ -10,18 +10,18 @@ const FormComponent = () => {
         <span className="text-[#9667e0]">Plan</span> in Seconds
       </h3>
 
-      <div className="flex items-center justify-center mt-14 max-w-md mx-auto bg-white p-4 rounded-lg shadow-lg">
+      <div className="flex items-center justify-center mt-14 max-w-md mx-auto bg-white p-4 rounded-lg shadow-2xl">
         <form action="/generate" method="POST">
           <p className="text-black mt-4">Subject</p>
           <input
-            className="px-4 py-2 mb-7 border text-black rounded-md w-full"
+            className="px-4 py-2 mb-7 border text-black rounded-md w-full focus:border-[#9667e0] focus:outline-none"
             type="text"
             placeholder="Science"
           />
 
           <p className="text-black">Lesson</p>
           <input
-            className="px-4 py-2 mb-7 border text-black rounded-md w-full"
+            className="px-4 py-2 mb-7 border text-black rounded-md w-full focus:border-[#9667e0] focus:outline-none"
             type="text"
             placeholder="Solar System"
           />
@@ -30,7 +30,7 @@ const FormComponent = () => {
             <div className="w-1/2">
               <p className="text-black">Duration</p>
               <input
-                className="px-4 py-2 border text-black rounded-md w-full"
+                className="px-4 py-2 border text-black rounded-md w-full focus:border-[#9667e0] focus:outline-none"
                 type="text"
                 placeholder="1 hour"
               />
@@ -39,7 +39,7 @@ const FormComponent = () => {
             <div className="w-1/2">
               <p className="text-black">Grade Level</p>
               <input
-                className="px-4 py-2 border text-black rounded-md w-full"
+                className="px-4 py-2 border text-black rounded-md w-full focus:border-[#9667e0] focus:outline-none"
                 type="text"
                 placeholder="Grade 4 or 4th Grade"
               />
@@ -48,7 +48,7 @@ const FormComponent = () => {
 
           <p className="text-black">Type</p>
           <select
-            className="px-4 py-2 text-black border rounded-md w-full mb-7"
+            className="px-4 py-2 text-black border rounded-md w-full mb-7 focus:border-[#9667e0] focus:outline-none"
             name="gradeType"
           >
             <option className="text-black" value="elementary">
