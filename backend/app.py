@@ -8,6 +8,17 @@ CORS(app)
 def index():
     return '<h1>Hello, World</h1>'
 
+def validate_data(data, required_fields):
+
+    '''Tovalidate Data Input'''
+    
+    for field in required_fields:
+        if field not in data or not data.get(field):
+            return False, f'Missing Field: {field}'
+        
+    return True, None
+
+
 @app.route('/send-data', methods=['POST'])
 def send_data():
     try:
@@ -15,9 +26,9 @@ def send_data():
 
         '''Validation'''
         required_fields = ['subject', 'lesson', 'duration', 'gradeLevel', 'gradeType']
-        for field in required_fields:
-            if field not in data or not data.get(field):
-                return jsonify({'error': f'Missing Field: {field}'}), 400
+        is_valid, error_messsage = validate_data(data, required_fields)
+        if not is_valid:
+            return jsonify({'error': error_messsage}), 400
             
         subject = data.get('subject')
         lesson = data.get('lesson')
