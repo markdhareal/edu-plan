@@ -35,6 +35,8 @@ const FormComponent = ({ onLessonPlanGenerated }) => {
 
       if (response.data && response.data.lesson_plan) {
         onLessonPlanGenerated(response.data.lesson_plan);
+      } else {
+        console.log("No Lesson Plan found in response");
       }
     } catch (error) {
       console.log("Error", error);

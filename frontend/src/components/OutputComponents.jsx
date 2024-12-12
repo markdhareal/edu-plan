@@ -1,6 +1,7 @@
 import React from "react";
 
 const OutputComponents = ({ lessonPlan }) => {
+  console.log("Lesson Plan in OutputComponents:", lessonPlan);
   return (
     <>
       <h1 className="head_text text-black">

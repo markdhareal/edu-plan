@@ -43,7 +43,7 @@ def send_data():
         gradeType = data.get('gradeType')
 
         generated_response = generate_response(subject,lesson,duration, gradeLevel, gradeType)
-        return jsonify({'lesson_plan: ': generated_response})
+        return jsonify({'lesson_plan': generated_response})
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500

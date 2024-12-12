@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import FormComponent from "./FormComponent";
 import OutputComponents from "./OutputComponents";
@@ -9,8 +9,9 @@ import NavBar from "./NavBar";
 const MainPage = () => {
   const [lessonPlan, setLessonPlan] = useState(null);
 
-  const handleGeneratedLessonPlan = (generatedPlan) => {
-    setLessonPlan(generatedPlan);
+  const handleGeneratedLessonPlan = (lessonPlan) => {
+    console.log("Received lesson plan in MainPage:", lessonPlan);
+    setLessonPlan(lessonPlan);
   };
 
   return (
