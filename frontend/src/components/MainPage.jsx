@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import FormComponent from "./FormComponent";
 import OutputComponents from "./OutputComponents";
@@ -7,6 +7,12 @@ import "../App.css";
 import NavBar from "./NavBar";
 
 const MainPage = () => {
+  const [lessonPlan, setLessonPlan] = useState(null);
+
+  const handleGeneratedLessonPlan = (generatedPlan) => {
+    setLessonPlan(generatedPlan);
+  };
+
   return (
     <>
       <NavBar />
@@ -16,10 +22,10 @@ const MainPage = () => {
         </div>
         <div className="app">
           <div className="w-1/2 p-4">
-            <FormComponent />
+            <FormComponent onLessonPlanGenerated={handleGeneratedLessonPlan} />
           </div>
           <div className="w-1/2 p-4">
-            <OutputComponents />
+            <OutputComponents lessonPlan={lessonPlan} />
           </div>
         </div>
       </main>

@@ -2,10 +2,13 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
 import google.generativeai as genai
+from file_reader import read_text
 import os
 
 app = Flask(__name__)
 CORS(app)
+
+load_dotenv()
 
 @app.route('/')
 def index():
@@ -39,19 +42,24 @@ def send_data():
         gradeLevel = data.get('gradeLevel')
         gradeType = data.get('gradeType')
 
-        return jsonify({
-            'subject': subject,
-            'lesson': lesson,
-            'duration': duration,
-            'gradeLevel': gradeLevel,
-            'gradeType': gradeType,
-        })
+        generated_response = generate_response(subject,lesson,duration, gradeLevel, gradeType)
+        return jsonify({'lesson_plan: ': generated_response})
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     
-@app.route('/generate', methods=['GET'])
 def generate_response(subject, lesson, duration, gradeLevel, gradeType):
+
+    template = read_text(f'{gradeType}.txt')
+
+    prompt = f'''
+        You are an expert educator with years of experience in creating detailed, effective lesson plans. You approach each plan with a professional mindset, ensuring it aligns with educational standards and meets the specific needs of your students.
+
+        Based on the provided template, create a comprehensive lesson plan for the subject {subject}. The lesson will focus on {lesson} and will be taught over a duration of {duration} (either hours or minutes).
+
+        The students in this class are in {gradeLevel}, which is part of the {gradeType} education level. Please ensure the lesson plan is engaging, includes clear objectives, and provides appropriate activities and assessments for this grade level.
+
+        Follow this template for the lesson plan structure: {template}'''
     
     generation_config = {
         'temperature': 0.5,
@@ -61,7 +69,15 @@ def generate_response(subject, lesson, duration, gradeLevel, gradeType):
         'response_mime_type':'text/plain'
     }
 
+    API_KEY = os.getenv('GEMINI_API_KEY')
+
+    genai.configure(api_key=API_KEY)
+
     model = genai.GenerativeModel(model_name='gemini-1.5-flash', generation_config=generation_config)
+
+    response = model.generate_content(prompt)
+
+    return response.text
 
 if __name__ == '__main__':
     app.run(debug=True)

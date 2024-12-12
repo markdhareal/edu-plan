@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-const FormComponent = () => {
+const FormComponent = ({ onLessonPlanGenerated }) => {
   const [formData, setFormData] = useState({
     subject: "",
     lesson: "",
@@ -21,11 +21,21 @@ const FormComponent = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("send-data", formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(
+        "http://127.0.0.1:5000/send-data",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log(response.data);
+
+      if (response.data && response.data.lesson_plan) {
+        onLessonPlanGenerated(response.data.lesson_plan);
+      }
     } catch (error) {
       console.log("Error", error);
     }
