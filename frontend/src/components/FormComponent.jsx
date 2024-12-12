@@ -1,5 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 const FormComponent = () => {
+  const [formData, setFormData] = useState({
+    subject: "",
+    lesson: "",
+    duration: "",
+    gradeLevel: "",
+    gradeType: "elementary",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("send-data", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+
   return (
     <>
       <h1 className="head_text text-black">
@@ -12,11 +43,14 @@ const FormComponent = () => {
       </h3> */}
 
       <div className="flex items-center justify-center mt-14 max-w-md mx-auto bg-white p-4 rounded-lg shadow-2xl">
-        <form action="/generate" method="POST">
+        <form onSubmit={handleSubmit} method="POST">
           <p className="text-black mt-4">Subject</p>
           <input
             className="px-4 py-2 mb-7 border text-black rounded-md w-full focus:border-[#9667e0] focus:outline-none"
             type="text"
+            name="subject"
+            value={formData.subject}
+            onChange={handleChange}
             placeholder="Science"
           />
 
@@ -24,6 +58,9 @@ const FormComponent = () => {
           <input
             className="px-4 py-2 mb-7 border text-black rounded-md w-full focus:border-[#9667e0] focus:outline-none"
             type="text"
+            name="lesson"
+            value={formData.lesson}
+            onChange={handleChange}
             placeholder="Solar System"
           />
 
@@ -33,6 +70,9 @@ const FormComponent = () => {
               <input
                 className="px-4 py-2 border text-black rounded-md w-full focus:border-[#9667e0] focus:outline-none"
                 type="text"
+                name="duration"
+                value={formData.duration}
+                onChange={handleChange}
                 placeholder="1 hour"
               />
             </div>
@@ -42,6 +82,9 @@ const FormComponent = () => {
               <input
                 className="px-4 py-2 border text-black rounded-md w-full focus:border-[#9667e0] focus:outline-none"
                 type="text"
+                name="gradeLevel"
+                value={formData.gradeLevel}
+                onChange={handleChange}
                 placeholder="Grade 4 or 4th Grade"
               />
             </div>
@@ -51,6 +94,8 @@ const FormComponent = () => {
           <select
             className="px-4 py-2 text-black border rounded-md w-full mb-7 focus:border-[#9667e0] focus:outline-none"
             name="gradeType"
+            value={formData.gradeType}
+            onChange={handleChange}
           >
             <option className="text-black" value="elementary">
               Elementary
