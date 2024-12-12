@@ -1,5 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from dotenv import load_dotenv
+import google.generativeai as genai
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -10,7 +13,7 @@ def index():
 
 def validate_data(data, required_fields):
 
-    '''Tovalidate Data Input'''
+    '''To validate Data Input'''
     
     for field in required_fields:
         if field not in data or not data.get(field):
@@ -46,6 +49,19 @@ def send_data():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+@app.route('/generate', methods=['GET'])
+def generate_response(subject, lesson, duration, gradeLevel, gradeType):
+    
+    generation_config = {
+        'temperature': 0.5,
+        'top_p': 0.95,
+        'top_k': 40,
+        'max_output_tokens': 8192,
+        'response_mime_type':'text/plain'
+    }
+
+    model = genai.GenerativeModel(model_name='gemini-1.5-flash', generation_config=generation_config)
 
 if __name__ == '__main__':
     app.run(debug=True)
