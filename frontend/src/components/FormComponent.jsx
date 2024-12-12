@@ -6,9 +6,10 @@ const FormComponent = () => {
         Generate <span className="text-[#9667e0]">Lesson Plan</span>
       </h1>
 
-      <h3 className="head_text text-black">
+      <div className="bg-[#9667e0] w-full h-1 mt-6" />
+      {/* <h3 className="head_text text-black">
         <span className="text-[#9667e0]">Plan</span> in Seconds
-      </h3>
+      </h3> */}
 
       <div className="flex items-center justify-center mt-14 max-w-md mx-auto bg-white p-4 rounded-lg shadow-2xl">
         <form action="/generate" method="POST">
