@@ -2,6 +2,7 @@ Structured Lesson Plan Template
 Lesson Title:
 Grade Level:
 Subject:
+Lesson:
 Learning Objectives
 By the end of this lesson, students will be able to:
 [Objective 1]

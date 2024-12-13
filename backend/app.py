@@ -54,19 +54,20 @@ def generate_response(subject, lesson, duration, gradeLevel, gradeType):
 
     prompt = f'''
         You are an expert educator with years of experience in creating detailed, effective lesson plans. You approach each plan with a professional mindset, ensuring it aligns with educational standards and meets the specific needs of your students.
-
         Based on the provided template, create a comprehensive lesson plan for the subject {subject}. The lesson will focus on {lesson} and will be taught over a duration of {duration} (either hours or minutes).
-
         The students in this class are in {gradeLevel}, which is part of the {gradeType} education level. Please ensure the lesson plan is engaging, includes clear objectives, and provides appropriate activities and assessments for this grade level.
-
-        Follow this template for the lesson plan structure: {template}'''
+        Follow this template for the lesson plan structure: {template}
+        NOTE: The output should not be formatted as markdown; please remove any markdown syntax and format it as it would be in a DOCX or PDF file.
+        NOTE: The output should not be formatted as markdown; please remove any markdown syntax and format it as it would be in a DOCX or PDF file.
+        NOTE: The output should not be formatted as markdown; please remove any markdown syntax and format it as it would be in a DOCX or PDF file.
+        '''
     
     generation_config = {
         'temperature': 0.5,
         'top_p': 0.95,
         'top_k': 40,
         'max_output_tokens': 8192,
-        'response_mime_type':'text/plain'
+        'response_mime_type':'application/json'
     }
 
     API_KEY = os.getenv('GEMINI_API_KEY')
