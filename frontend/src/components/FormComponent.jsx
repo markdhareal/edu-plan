@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 const FormComponent = ({ onLessonPlanGenerated }) => {
+  const [buttonState, setButtonState] = useState(true);
   const [formData, setFormData] = useState({
     subject: "",
     lesson: "",
@@ -8,6 +9,32 @@ const FormComponent = ({ onLessonPlanGenerated }) => {
     gradeLevel: "",
     gradeType: "elementary",
   });
+
+  const [error, setError] = useState({
+    subject: "",
+    lesson: "",
+    duration: "",
+    gradeLevel: "",
+  });
+
+  const validateForm = () => {
+    let valid = true;
+    const errorState = {};
+
+    Object.keys(formData).forEach((field) => {
+      if (!formData[field].trim()) {
+        errorState[field] = `${
+          field.charAt(0).toUpperCase() + field.slice(1)
+        } is required.`;
+        valid = false;
+      } else {
+        errorState[field] = "";
+      }
+    });
+
+    setError(errorState);
+    return valid;
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,6 +46,11 @@ const FormComponent = ({ onLessonPlanGenerated }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setButtonState(!buttonState);
+
+    if (!validateForm()) {
+      return;
+    }
 
     try {
       const response = await axios.post(
@@ -38,6 +70,18 @@ const FormComponent = ({ onLessonPlanGenerated }) => {
       } else {
         console.log("No Lesson Plan found in response");
       }
+
+      setFormData({
+        subject: "",
+        lesson: "",
+        duration: "",
+        gradeLevel: "",
+        gradeType: "elementary",
+      });
+
+      setError({});
+
+      setButtonState(buttonState);
     } catch (error) {
       console.log("Error", error);
     }
@@ -58,7 +102,11 @@ const FormComponent = ({ onLessonPlanGenerated }) => {
         <form onSubmit={handleSubmit} method="POST">
           <p className="text-black mt-4">Subject</p>
           <input
-            className="px-4 py-2 mb-7 border text-black rounded-md w-full focus:border-[#9667e0] focus:outline-none"
+            className={`px-4 py-2 mb-7 border text-black rounded-md w-full ${
+              error.subject
+                ? "border-[#c52d34]"
+                : "focus:border-[#9667e0] focus:outline-none"
+            }`}
             type="text"
             name="subject"
             value={formData.subject}
@@ -68,7 +116,11 @@ const FormComponent = ({ onLessonPlanGenerated }) => {
 
           <p className="text-black">Lesson</p>
           <input
-            className="px-4 py-2 mb-7 border text-black rounded-md w-full focus:border-[#9667e0] focus:outline-none"
+            className={`px-4 py-2 mb-7 border text-black rounded-md w-full ${
+              error.lesson
+                ? "border-[#c52d34]"
+                : "focus:border-[#9667e0] focus:outline-none"
+            }`}
             type="text"
             name="lesson"
             value={formData.lesson}
@@ -80,7 +132,11 @@ const FormComponent = ({ onLessonPlanGenerated }) => {
             <div className="w-1/2">
               <p className="text-black">Duration</p>
               <input
-                className="px-4 py-2 border text-black rounded-md w-full focus:border-[#9667e0] focus:outline-none"
+                className={`px-4 py-2 mb-7 border text-black rounded-md w-full ${
+                  error.duration
+                    ? "border-[#c52d34]"
+                    : "focus:border-[#9667e0] focus:outline-none"
+                }`}
                 type="text"
                 name="duration"
                 value={formData.duration}
@@ -92,7 +148,11 @@ const FormComponent = ({ onLessonPlanGenerated }) => {
             <div className="w-1/2">
               <p className="text-black">Grade Level</p>
               <input
-                className="px-4 py-2 border text-black rounded-md w-full focus:border-[#9667e0] focus:outline-none"
+                className={`px-4 py-2 mb-7 border text-black rounded-md w-full ${
+                  error.gradeLevel
+                    ? "border-[#c52d34]"
+                    : "focus:border-[#9667e0] focus:outline-none"
+                }`}
                 type="text"
                 name="gradeLevel"
                 value={formData.gradeLevel}
@@ -116,12 +176,16 @@ const FormComponent = ({ onLessonPlanGenerated }) => {
               High School
             </option>
           </select>
-          <button
-            className="font-bold px-6 py-4 text-white rounded w-full bg-[#9667e0] transition-all duration-200 shadow-md hover:ring-[#b590f1] hover:ring-4 active:scale-95 active:bg-[#b590f1]"
-            type="submit"
-          >
-            Generate
-          </button>
+          {buttonState ? (
+            <button
+              className="font-bold px-6 py-4 text-white rounded w-full bg-[#9667e0] transition-all duration-200 shadow-md hover:ring-[#b590f1] hover:ring-4 active:scale-95 active:bg-[#b590f1]"
+              type="submit"
+            >
+              Generate
+            </button>
+          ) : (
+            <p className="text-black">Loading...</p>
+          )}
         </form>
       </div>
     </>
