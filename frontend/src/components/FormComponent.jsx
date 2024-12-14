@@ -55,7 +55,7 @@ const FormComponent = ({ onLessonPlanGenerated }) => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:5000/send-data",
+        "https://edu-plan.onrender.com/send-data",
         formData,
         {
           headers: {
