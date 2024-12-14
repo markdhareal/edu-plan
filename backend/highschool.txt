@@ -3,6 +3,13 @@ Lesson Title:
 Grade Level:
 Subject:
 Lesson:
+Total Duration: {total_duration}
+Introduction/Hook: {time}
+Direct Instruction: {time}
+Guided Practice: {time}
+Independent Practice: {time}
+Closure: {time}
+Assessment: {time}
 Learning Objectives
 By the end of this lesson, students will be able to:
 [Objective 1]
@@ -37,4 +44,4 @@ Formative assessment through participation and completed activities.
 Accommodations/Modifications
 List strategies for different learners, such as visual aids for visual learners or extended time for those needing it.
 Reflection (Post-Lesson)
-Reflect on the effectiveness of the lesson and areas for improvement.
+Reflect on the effectiveness of the lesson and areas for improvement. This template provides a clear structure, allowing you to fill in specific details and allocate time for each part of the lesson effectively.

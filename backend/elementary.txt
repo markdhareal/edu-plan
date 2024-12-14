@@ -1,8 +1,14 @@
 Narrative Style Lesson Plan
-Lesson Plan
 Grade Level:
 Subject:
 Lesson:
+Total Duration: {total_duration}
+Introduction/Hook: {time}
+Direct Instruction: {time}
+Guided Practice: {time}
+Independent Practice: {time}
+Closure: {time}
+Assessment: {time}
 Learning Objectives
 By the end of this lesson, students will be able to:
 [Objective 1]
@@ -41,4 +47,4 @@ For Visual Learners: Use diagrams and videos.
 For ELL Students: Provide a vocabulary sheet with translations.
 For Students with Learning Disabilities: Allow extended time on worksheets.
 Reflection (Post-Lesson)
-Reflect on how the lesson went, what worked well, and what could be improved for future lessons.
+Reflect on how the lesson went, what worked well, and what could be improved for future lessons. This structured format clearly delineates each section of the lesson plan and provides spaces for you to fill in specific details, including time allocations for each part of the lesson.
