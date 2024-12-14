@@ -64,7 +64,7 @@ def generate_response(subject, lesson, duration, gradeLevel, gradeType):
         IMPORTANT: Adhere strictly to the following lesson plan structure: {template}.
         IMPORTANT: Adhere strictly to the following lesson plan structure: {template}.
         
-        NOTE: Please format the output as a markdown suitable for a DOCX or PDF file.'''
+        NOTE: Please format the output as markdown. Use different markdown symbols to make it look presentable.'''
     
     generation_config = {
         'temperature': 0.5,
