@@ -29,7 +29,7 @@ const HeroSection = () => {
 
         <button
           onClick={handleClickGetStarted}
-          className="mt-10 px-8 py-3 border rounded-full bg-black text-white text-xl font-semibold border-black transition-all duration-200 max-w-[250px] mx-auto shadow-md hover:ring-gray-400 hover:ring-4 active:scale-95 active:bg-gray-700"
+          className="mt-10 px-8 py-3 border rounded-full bg-black text-white text-xl font-semibold transition-all duration-200 max-w-[250px] mx-auto shadow-md hover:ring-gray-400 hover:ring-4 active:scale-95 active:bg-gray-700"
         >
           Get Started
         </button>

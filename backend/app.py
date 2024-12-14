@@ -1,14 +1,22 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session
 from flask_cors import CORS
 from dotenv import load_dotenv
 import google.generativeai as genai
 from file_reader import read_text
 import os
+import uuid
 
 app = Flask(__name__)
 CORS(app)
 
 load_dotenv()
+
+app.secret_key = os.getenv('FLASK_SECRET_KEY')
+
+@app.before_request
+def create_session_if_needed():
+    if 'user_id' not in session:
+        session['user_id'] = str(uuid.uuid4()) # Generate unique ID for the user
 
 @app.route('/')
 def index():
@@ -28,6 +36,11 @@ def validate_data(data, required_fields):
 @app.route('/send-data', methods=['POST'])
 def send_data():
     try:
+
+        if 'user_id' not in session:
+            return jsonify({'error':"Session not found."}), 400
+        
+        user_id = session['user_id']
         data = request.json
 
         '''Validation'''
@@ -43,7 +56,7 @@ def send_data():
         gradeType = data.get('gradeType')
 
         generated_response = generate_response(subject,lesson,duration, gradeLevel, gradeType)
-        return jsonify({'lesson_plan': generated_response})
+        return jsonify({'lesson_plan': generated_response, 'user_id': user_id})
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
