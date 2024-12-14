@@ -7,7 +7,7 @@ import os
 import uuid
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "https://edu-plan-rouge.vercel.app"}})
+CORS(app, resources={r"/send-data": {"origins": "https://edu-plan-rouge.vercel.app"}})
 
 load_dotenv()
 
