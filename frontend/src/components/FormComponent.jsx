@@ -49,6 +49,7 @@ const FormComponent = ({ onLessonPlanGenerated }) => {
     setButtonState(!buttonState);
 
     if (!validateForm()) {
+      setButtonState(buttonState);
       return;
     }
 
@@ -184,7 +185,11 @@ const FormComponent = ({ onLessonPlanGenerated }) => {
               Generate
             </button>
           ) : (
-            <p className="text-black">Loading...</p>
+            <div className="flex flex-col w-full m-auto">
+              <p className="flex justify-center text-black font-bold ">
+                Generating Lesson Plan
+              </p>
+            </div>
           )}
         </form>
       </div>
