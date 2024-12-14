@@ -1,11 +1,17 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import LandingPage from "./components/LandingPage";
+import MainPage from "./components/MainPage";
 
 const App = () => {
   return (
     <>
-      <div>
-        <h1 className="head_text bg-[#9667e0]">Form Component</h1>
-      </div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/main" element={<MainPage />} />
+        </Routes>
+      </Router>
     </>
   );
 };
